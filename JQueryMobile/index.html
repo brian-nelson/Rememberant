@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Remembrant</title>
+	
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="Theme4.min.css" />
+	<link rel="stylesheet" href="jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="/JQueryMobile/lib/jquery.min.js"></script>
+	<script src="/JQueryMobile/lib/jquery.mobile-1.4.5.min.js"></script>
+	<script src="/JQueryMobile/lib/lokijs.min.js"></script>
+	<script src="/JQueryMobile/lib/loki-indexed-adapter.js"></script>
+	<script src="http://cdn.rawgit.com/jquery/jquery-ui/1.10.4/ui/jquery.ui.datepicker.js"></script>
+	<script id="mobile-datepicker" src="http://cdn.rawgit.com/arschmitz/jquery-mobile-datepicker-wrapper/v0.1.1/jquery.mobile.datepicker.js"></script>
+	
+	<script src="helpers.js"></script>
+	<script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="Remembrant.css">
+</head>
+
+<body>
+	<div id="home" data-role="page">
+		<div data-role="header">
+			<h1>Rememberant</h1>
+			<a class="ui-btn-right" href="#about">About</a>
+		</div>
+		<div class="scroll">
+			<ul data-role="listview">
+				<li class="calendar"><a href="#calendar">View Calendar <small class="counter">0</small></a> 
+				</li>
+				<li class="tasks"><a href="#tasks">Tasks <small class="counter">
+						<label id="lblTasksCount"></label>
+					</small></a>
+				</li>
+				<li class="subjects"><a href="#subjects">Subjects <small class="counter">
+						<label id="lblSubjectsCount"></label>
+					</small></a>
+				</li>
+			</ul>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<p>Add this page to your home screen
+				<br>for a richer experience.</p>
+		</div>
+	</div>
+	<div id="about" data-role="page">
+		<div data-role="header">
+			<h1>About</h1>
+			<a class="ui-btn-left" href="#home">Home</a>
+		</div>
+		Rememberant is a user friendly interface created to assist people organize their busy lives.
+		Rememberant allowes you to customize your subjects and tasks in order to assist you with getting assignments and tasks done on time.
+		<div role="main" class="ui-content">
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+
+	<div id="login" data-role="page">
+
+	</div>
+	<div id="signup" data-role="page">
+
+	</div>
+	<div id="calendar" data-role="page">
+		<div data-role="header">
+			<h1>Calendar</h1>
+			<a class="ui-btn-left" href="#home">Home</a>
+			<a class="ui-btn-right" href="#addtask" data-transition="slideup">Add</a>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+	<div id="tasks" data-role="page">
+		<div data-role="header">
+			<h1>Tasks</h1>
+			<a class="ui-btn-left" href="#home">Home</a>
+			<!-- 			<a class="ui-btn" href="#edit">Edit</a> -->
+			<a class="ui-btn-right" href="#addtask" data-transition="slideup">Add</a>
+		</div>
+		<div role="main" class="ui-content">
+			<ul id="tasklist" data-role="listview">
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+	<div id="subjects" data-role="page">
+		<div data-role="header">
+			<h1>Subjects</h1>
+			<a class="ui-btn-left" href="#home">Home</a>
+			<a class="ui-btn-right" href="#addsubject" data-transition="slideup">Add</a>
+		</div>
+		<div role="main" class="ui-content">
+			<table id="subjectsTable" data-role="table" class="ui-responsive">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>						
+					</tr>
+      	</thead>
+      	<tbody id="subjectsTableBody">
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>			
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+	<div id="addtask" data-role="page">
+		<div data-role="header">
+			<h1>New Task</h1>
+			<a class="ui-btn-left" data-rel="back" id="cancelTask">Cancel</a>
+			<a class="ui-btn-right" data-rel="back" id="saveTask">Save</a>
+		</div>
+		<div role="main" class="ui-content">
+			<form id="newtask">
+				<input type="hidden" name="hidTaskId" id="hidTaskId" value="0"></input>
+				<label for="txtTaskTitle">Task Title:</label>
+				<input type="text" data-clear-btn="true" name="txtTaskTitle" id="txtTaskTitle" value="">
+				<label for="txtTaskDescription">Task Description:</label>
+				<textarea name="txtTaskDescription" id="txtTaskDescription"></textarea>
+				Task Subject:
+				<form class="ui-filterable">
+
+					<input id="autocomplete-input" data-type="search" placeholder="Search Subjects...">
+				</form>
+				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input" data-inset="true">
+ 					<li><a href="#"></a></li>
+    			<li><a href="#"></a></li>
+    			<li><a href="#"></a></li>
+    			<li><a href="#"></a></li>
+    			<li><a href="#"></a></li>
+    			<li><a href="#"></a></li>
+				</ul>
+				Due Date:
+				<input type="text" data-role="date" data-inline="true">
+			</form>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+	<div id="addsubject" data-role="page">
+		<div data-role="header">
+			<h1>New Subject</h1>
+			<a class="ui-btn-left" data-rel="back" id="cancelSubject">Cancel</a>
+			<a class="ui-btn-right" data-rel="back" id="saveSubject">Save</a>
+		</div>
+		<div role="main" class="ui-content">
+			<form id="newsubject">
+				<input type="hidden" name="hidSubjectId" id="hidSubjectId" value="0"></input>
+				<label for="txtSubjectTitle">Subject Title:</label>
+				<input type="text" data-clear-btn="true" name="txtSubjectTitle" id="txtSubjectTitle" value="">
+				<label for="txtSubjectDescription">Subject Description:</label>
+				<textarea name="txtSubjectDescription" id="txtSubjectDescription"></textarea>
+			</form>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			Rememberant
+		</div>
+	</div>
+</body>
+
+</html>

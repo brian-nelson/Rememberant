@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Remembrant</title>
+	<link rel="stylesheet" href="/JQTouch/themes/css/jqtouch.min.css" data-jqt-theme>
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<script src="/JQTouch/lib/zepto/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/JQTouch/src/jqt.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="app.js"></script>
+	<link rel="stylesheet" type="text/css" href="Remembrant.css">
+
+
+</head>
+
+<body>
+	<div id="jqt" class="">
+		<div id="about" class="selectable">
+			<div class="toolbar">
+				<h1>Rememberant</h1>
+				<a class="back" href="#">Home</a>
+			</div>
+		</div>
+		<div id="login" class="">
+
+		</div>
+		<div id="signup" class="">
+
+		</div>
+		<div id="calendar" class="">
+			<div class="toolbar">
+				<h1>Calendar</h1>
+				<a class="back" href="#">Home</a>
+				<a href="#addtask" class="btn2 slideup">Add</a>
+			</div>
+		</div>
+		<div id="tasks" class="">
+			<div class="toolbar">
+				<h1>Tasks</h1>
+				<a class="back" href="#">Home</a>
+				<a href="#addtask" class="btn2 slideup">Add</a>
+			</div>
+		</div>
+		<div id="subjects" class="">
+			<div class="toolbar">
+				<h1>Subjects</h1>
+				<a class="back" href="#">Home</a>
+				<a href="#addsubject" class="btn2 slideup">Add</a>
+			</div>
+		</div>
+		<div id="addtask">
+			<div class="toolbar">
+				<h1>New Task</h1>
+				<a class="back" href="#">Cancel</a>
+				<a href="#" class="btn2 goback">Save</a>
+			</div>
+			<ul class="rounded">
+				<li>
+					Due Date <input type="date" id="taskDueDate" placeholder="Enter due date" />
+				</li>
+				<!-- help me -->
+			</ul>
+		</div>
+		<div id="addsubject">
+			<div class="toolbar">
+				<h1>New Subject</h1>
+				<a class="back" href="#">Cancel</a>
+				<a href="#" class="btn2 goback">Save</a>
+			</div>
+			<ul class="rounded">
+				<li>
+					<input type="text" id="subjectTitle" placeholder="Enter your subject" />
+				</li>
+				<!-- <li><textarea id="description" placeholder="Descripton"></textarea></li> -->
+			</ul>
+			</ul>
+		</div>
+		<div id="home" class="current">
+			<div class="toolbar">
+				<h1>Rememberant</h1>
+				<a class="button slideup" id="infoButton" href="#about">About</a>
+			</div>
+			<div class="scroll">
+				<ul class="rounded">
+					<li class="calendar"><a href="#calendar">View Calendar <small class="counter">0</small></a> 
+					</li>
+					<li class="tasks"><a href="#tasks">Tasks <small class="counter">0</small></a>
+					</li>
+					<li class="subjects"><a href="#subjects">Subjects <small class="counter">0</small></a>
+					</li>
+				</ul>
+			</div>
+			<div class="info">
+				<p>Add this page to your home screen
+					<br>for a richer experience.</p>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

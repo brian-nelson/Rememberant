@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.container h1{
+	color:#F79495;
+	align-content:center;
+	font-size:36px;
+	font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	float:left;
+		
+}
+
+body{
+	background-image:url("Images/red-smoke-wallpaper-10777-11286-hd-wallpapers.jpg");
+	background-color:#8B0A0C;
+}
+
+.buttons{
+	float:inherit;
+	align-items:center;
+	
+	
+}
