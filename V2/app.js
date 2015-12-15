@@ -4,6 +4,7 @@ var dbSubjects = {};
 var dbTasks = {};
 var dbSubjectsCount = 0;
 var dbTasksCount = 0;
+var calendarCtrl = null;
 
 function loadLoki()
 {
@@ -79,10 +80,18 @@ function showHome()
 	showPage("home");
 }
 
+function showCalendar()
+{
+	populateCalendar();
+	$("#addTaskCancel").attr("href", "javascript:showCalendar();");
+	showPage("calendar");
+}
+
 function showTasks()
 {
 	loadTasks();
 	populateTasksTable();
+	$("#addTaskCancel").attr("href", "javascript:showTasks();");
 	showPage("tasks")
 }
 
@@ -189,7 +198,7 @@ function saveTask() {
 	task.Id = $("#hidTaskId").val();
 	task.Title = $("#txtTaskTitle").val();
 	task.Description = $("#txtTaskDescription").val();
-	task.Subject = $("#txtTaskSubject").val();
+	task.Subject = $("#cmbSubjectList").val();
 	task.DueDate = $("#datDueDate").datetimepicker().date();
 
 	if (task.Id == 0) {
@@ -201,14 +210,19 @@ function saveTask() {
 		dbTasks.update(task);
 	}
 	
-	showTasks();
+	if ($("#addTaskCancel").href == "javascript:showTasks();") {
+		showTasks();
+	} else {
+		showCalendar();
+	}
+	
 }
 
 function populateSubjectList()
 {
 	var combo = $("#subjectList");
 	var array = dbSubjects.data;
-	var html = "";
+	var html = '<option value="">Select a Subject</option>';
 	
 	for (var i=0; i < array.length; i++) {
 		var data = array[i];
@@ -247,8 +261,19 @@ function populateSubjectsTable()
 	$('#subjectsTableBody').append(html);
 }
 
+function populateCalendar()
+{
+	
+}
+
 $(document).ready(function() {	
 	$('#datDueDate').datetimepicker();
+	$('.combobox').combobox();
+	calendarCtrl = $("#calendarControl").calendar( {
+		tmpl_path: "/V2/bower_components/bootstrap-calendar/tmpls/",
+    events_source: function () { return []; }
+  }); 
+	
 	loadLoki();
 	showHome();	
 });
