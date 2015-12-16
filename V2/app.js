@@ -210,7 +210,7 @@ function saveTask() {
 		dbTasks.update(task);
 	}
 	
-	if ($("#addTaskCancel").href == "javascript:showTasks();") {
+	if ($("#addTaskCancel").attr("href") == "javascript:showTasks();") {
 		showTasks();
 	} else {
 		showCalendar();
