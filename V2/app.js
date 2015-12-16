@@ -169,8 +169,8 @@ function clearAddTaskForm()
 	$("#hidTaskId").val("");
 	$("#txtTaskTitle").val("");
 	$("#txtTaskDescription").val("");
-	$("txtTaskSubject").val("")
-	$("datDueDate").datetimepicker().clear();
+	$("#txtTaskSubject").val("")
+	$("#datDueDate").datetimepicker().clear();
 }
 
 function saveSubject() {
@@ -199,7 +199,7 @@ function saveTask() {
 	task.Title = $("#txtTaskTitle").val();
 	task.Description = $("#txtTaskDescription").val();
 	task.Subject = $("#cmbSubjectList").val();
-	task.DueDate = $("#datDueDate").datetimepicker().date();
+	task.DueDate = $('#datDueDate').data('DateTimePicker').date();
 
 	if (task.Id == 0) {
 		//Give subject a new id
@@ -220,7 +220,7 @@ function saveTask() {
 
 function populateSubjectList()
 {
-	var combo = $("#subjectList");
+	var combo = $("#cmbSubjectList");
 	var array = dbSubjects.data;
 	var html = '<option value="">Select a Subject</option>';
 	
@@ -229,7 +229,7 @@ function populateSubjectList()
 		html += '<option value="' + data.Title + '">' + data.Title + '</option>';
   }
 	
-	$('#subjectList').append(html);
+	$('#cmbSubjectList').append(html);
 }
 
 
@@ -263,12 +263,32 @@ function populateSubjectsTable()
 
 function populateCalendar()
 {
+	var array = dbTasks.data;
+	
+	var entries = [];
+	
+	for (var i=0; i < array.length; i++) {
+		var data = array[i];
+		
+		var entry = new Object();
+		entry.id = data.Id;
+		entry.title = data.Title;
+		entry.start = data.DueDate.getTime();
+		
+		entries.push(entry);
+	}
+	
+	return entries;
+}
+
+function formatTasks()
+{
 	
 }
 
 $(document).ready(function() {	
 	$('#datDueDate').datetimepicker();
-	$('.combobox').combobox();
+	
 	calendarCtrl = $("#calendarControl").calendar( {
 		tmpl_path: "/V2/bower_components/bootstrap-calendar/tmpls/",
     events_source: function () { return []; }
