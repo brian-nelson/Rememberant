@@ -269,13 +269,17 @@ function populateCalendar()
 	
 	for (var i=0; i < array.length; i++) {
 		var data = array[i];
-		
-		var entry = new Object();
-		entry.id = data.Id;
-		entry.title = data.Title;
-		entry.start = data.DueDate.getTime();
-		
-		entries.push(entry);
+		if (data.DueDate != null) {
+			var startDate = Date.parse(data.DueDate);
+			
+			if (startDate != null) {
+				var entry = new Object();
+				entry.id = data.Id;
+				entry.title = data.Title;
+				entry.start = startDate;
+				entries.push(entry);
+			}
+		}
 	}
 	
 	return entries;
