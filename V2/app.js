@@ -82,16 +82,16 @@ function showHome()
 
 function showCalendar()
 {
-	populateCalendar();
 	$("#addTaskCancel").attr("href", "javascript:showCalendar();");
+	populateCalendar();	
 	showPage("calendar");
 }
 
 function showTasks()
 {
-	loadTasks();
-	populateTasksTable();
 	$("#addTaskCancel").attr("href", "javascript:showTasks();");
+	loadTasks();
+	populateTasksTable();	
 	showPage("tasks")
 }
 
@@ -199,7 +199,7 @@ function saveTask() {
 	task.Title = $("#txtTaskTitle").val();
 	task.Description = $("#txtTaskDescription").val();
 	task.Subject = $("#cmbSubjectList").val();
-	task.DueDate = $('#datDueDate').data('DateTimePicker').date();
+	task.DueDate = $('#datDueDate').data('DateTimePicker').date().format();
 
 	if (task.Id == 0) {
 		//Give subject a new id
